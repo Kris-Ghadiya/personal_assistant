@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kris Ghadiya — Portfolio</title>
+  <meta name="description" content="Portfolio of Kris Ghadiya — AI/ML engineer | Computer Vision | Web & UI" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: #7c3aed;
+      --glass: rgba(255,255,255,0.03);
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg, #071126 0%, #071122 50%, #071018 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px;
+    }
+
+    .container{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#0ea5a4);display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+    h1{margin:0;font-size:20px}
+    .subtitle{color:var(--muted);font-size:13px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-bottom:32px}
+    .card{background:var(--card);padding:26px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+
+    .intro h2{margin:0 0 8px 0;font-size:28px}
+    .intro p{margin:0;color:var(--muted)}
+    .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{background:linear-gradient(90deg,var(--accent),#06b6d4);border:none;padding:10px 14px;border-radius:10px;color:white;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* profile card */
+    .profile{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+    .avatar{width:120px;height:120px;border-radius:20px;background:linear-gradient(180deg,#0ea5a4,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:#071018}
+    .info{color:var(--muted);font-size:14px}
+
+    /* sections */
+    section{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:20px}
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .project{padding:14px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
+    .project h3{margin:0 0 6px 0;font-size:16px}
+    .project p{margin:0;color:var(--muted);font-size:13px}
+
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);font-size:13px;color:var(--muted)}
+
+    /* contact */
+    .contact-form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:10px;border-radius:8px;color:inherit}
+    textarea{min-height:120px;resize:vertical}
+
+    footer{margin-top:30px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* responsiveness */
+    @media (max-width:920px){
+      .hero{grid-template-columns:1fr}
+      section{grid-template-columns:1fr}
+      .projects-grid{grid-template-columns:1fr}
+    }
+
+    /* little utilities */
+    .meta{font-size:13px;color:var(--muted)}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* project modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal .panel{width:min(720px,94%);background:#081126;padding:22px;border-radius:12px}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">KG</div>
+        <div>
+          <h1>Kris Ghadiya</h1>
+          <div class="subtitle">AI/ML Engineer — Computer Vision • Data Analytics • Full‑Stack Prototyping</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn" onclick="scrollToSection('projects')">View projects</button>
+        <button class="btn ghost" onclick="toggleTheme()" id="themeBtn">Toggle theme</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="card intro">
+          <h2>Hi — I'm Kris. I build computer vision systems and deploy ML products.</h2>
+          <p>Specializing in sign language recognition, real-time vision pipelines, and product-ready prototypes. I move models from notebooks to web apps (Flask) and edge deployments.</p>
+
+          <div class="cta">
+            <a href="#projects" class="btn">My Work</a>
+            <a href="#contact" class="btn ghost">Contact Me</a>
+          </div>
+
+          <div style="margin-top:18px;display:flex;gap:16px;align-items:center">
+            <div class="meta">📍 India</div>
+            <div class="meta">💼 Open to internships & collaborations</div>
+          </div>
+        </div>
+
+        <aside class="card profile">
+          <div class="avatar">KG</div>
+          <div style="font-weight:700">Kris Ghadiya</div>
+          <div class="info">B.Tech (CS) • AI/ML | Computer Vision • Management Head, college computer club</div>
+          <div style="display:flex;gap:8px;margin-top:6px">
+            <a class="btn" href="mailto:kris@example.com">Email</a>
+            <a class="btn ghost" href="#contact">Let's talk</a>
+          </div>
+        </aside>
+      </section>
+
+      <!-- PROJECTS & SKILLS -->
+      <section id="projects">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <h2 style="margin:0">Selected projects</h2>
+            <div class="small">Click a project to view details</div>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project" onclick="openProject('Sign Language Translator','A realtime sign language recognition system using CNNs + webcam, Flask deployment with sentence-level output and UI. Integrated dataset (~87k images, 29 classes).')">
+              <h3>Sign Language Translator</h3>
+              <p class="meta">Python • TensorFlow/Keras • Flask • OpenCV</p>
+            </div>
+
+            <div class="project" onclick="openProject('Umpire Assistant (Cricket)','Computer vision models to detect ball position, stumps, and events. Custom dataset creation and annotation pipeline; YOLO-based detection.')">
+              <h3>AI Umpire Assistant</h3>
+              <p class="meta">PyTorch • YOLO • CV Annotation</p>
+            </div>
+
+            <div class="project" onclick="openProject('Real-time Object Tracking','Low-latency tracking pipeline optimized for embedded CPUs — frame-drop mitigation & multi-threaded capture.')">
+              <h3>Real-time Tracker</h3>
+              <p class="meta">OpenCV • Multi-threading • Edge Optimizations</p>
+            </div>
+
+            <div class="project" onclick="openProject('Web Dashboards & EDA','Interactive dashboards, EDA notebooks, and model performance reporting for ML projects.')">
+              <h3>Dashboards & EDA</h3>
+              <p class="meta">Streamlit • Jupyter • Pandas</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">Skills & Tools</h3>
+          <div class="skills" style="margin-top:10px">
+            <span class="skill">Python</span>
+            <span class="skill">TensorFlow / Keras</span>
+            <span class="skill">PyTorch</span>
+            <span class="skill">OpenCV</span>
+            <span class="skill">Flask</span>
+            <span class="skill">HTML / CSS / JS</span>
+            <span class="skill">Git</span>
+            <span class="skill">Linux</span>
+            <span class="skill">Data Analysis</span>
+            <span class="skill">Model Optimization</span>
+          </div>
+
+          <div style="margin-top:18px">
+            <h4 style="margin:0 0 8px 0">Education</h4>
+            <div class="meta">B.Tech — Computer Science (Institute of Advanced Research) — Semester 6</div>
+
+            <h4 style="margin:14px 0 8px 0">Highlights</h4>
+            <ul class="small" style="margin:0;padding-left:18px;color:var(--muted)">
+              <li>Designed & trained CNNs for static gesture recognition (29 classes).</li>
+              <li>Deployed ML apps with Flask and worked on reducing webcam lag/frame-drops.</li>
+              <li>Led college computer club projects and coordinated team-based datasets/annotations.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT & CONTACT -->
+      <section>
+        <div class="card">
+          <h2>About me</h2>
+          <p class="meta">I'm Kris — an AI/ML engineer focusing on building practical computer vision systems that solve real problems. I enjoy turning models into interactive apps and optimizing pipelines for real-time performance. Outside of coding, I like making short video projects and experimenting with creative UI layouts.</p>
+
+          <h4 style="margin-top:12px">What I'm looking for</h4>
+          <p class="meta">Internships, collaborations on CV research, and capstone partners. Happy to mentor juniors on ML basics and CV annotation work.</p>
+        </div>
+
+        <div class="card" id="contact">
+          <h2>Contact</h2>
+          <p class="small">Prefer email — include a short description and links to relevant repos or documents.</p>
+
+          <form class="contact-form" onsubmit="sendMessage(event)">
+            <input type="text" id="name" placeholder="Your name" required />
+            <input type="email" id="email" placeholder="Your email" required />
+            <input type="text" id="subject" placeholder="Subject" />
+            <textarea id="message" placeholder="Message (brief)" required></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn" type="submit">Send</button>
+              <a class="btn ghost" href="mailto:kris@example.com">Email directly</a>
+            </div>
+            <div id="formMsg" class="small" style="margin-top:8px;color:var(--muted)"></div>
+          </form>
+
+          <div style="margin-top:12px" class="small">
+            GitHub: <a href="#">your-github</a> • LinkedIn: <a href="#">your-linkedin</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Kris Ghadiya — Built with ❤️ • Available for collaborations
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Project modal -->
+  <div class="modal" id="modal">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <strong id="modalTitle"></strong>
+        <button class="btn ghost" onclick="closeModal()">Close</button>
+      </div>
+      <div id="modalBody" class="small"></div>
+    </div>
+  </div>
+
+  <script>
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function openProject(title,desc){
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').textContent = desc;
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+    function sendMessage(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const msg = document.getElementById('formMsg');
+
+      // lightweight validation + demo behavior (real apps should POST to a backend)
+      if(!name || !email || !message){ msg.textContent = 'Please fill required fields.'; return; }
+      msg.textContent = `Thanks ${name}! This demo page doesn't send emails. Use the 'Email directly' button or connect a backend.`;
+      e.target.reset();
+    }
+
+    function scrollToSection(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    }
+
+    // simple theme toggle (in page only)
+    let dark = true;
+    function toggleTheme(){
+      dark = !dark;
+      if(!dark){
+        document.documentElement.style.setProperty('--bg','#f8fafc');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--muted','#475569');
+        document.documentElement.style.setProperty('--accent','#7c3aed');
+        document.body.style.color = '#071018';
+      } else {
+        document.documentElement.style.removeProperty('--bg');
+        document.documentElement.style.removeProperty('--card');
+        document.documentElement.style.removeProperty('--muted');
+        document.documentElement.style.removeProperty('--accent');
+        document.body.style.color = '';
+      }
+    }
+  </script>
+</body>
+</html>
